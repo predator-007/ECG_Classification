@@ -12,10 +12,11 @@ const Main=()=>{
             setres("please upload the image");
             return;
         }
-        //("https://ecg-classifier-api.herokuapp.com/")
+        //("https://ecg-classifier-api.herokuapp.com/predict")
+        //"http://127.0.0.1:5000/predict"
         setloading(true);
         var body=new FormData();
-        body.append("file",img);
+        body.append("image",img);
         Axios({
           method:"post",
           url: "https://ecg-classifier-api.herokuapp.com/predict",
@@ -30,7 +31,9 @@ const Main=()=>{
         
     }        
     return(
-        <Container>{
+        <div className="main" 
+        style={{width:"100%",height:"100%"}}
+        >{
             loading?
             <div>
             <img src="https://monebo.com/wp-content/uploads/2019/08/output_6U72fa.gif" 
@@ -52,16 +55,6 @@ const Main=()=>{
             </div>
             :
         <div>
-            <h1
-            style={
-                {
-                    display:"block",
-                    textAlign:"center",
-                    color:"darkred",
-                    textShadow:"5px 5px 10px #00FF00",
-                }
-            }
-            >ECG Arrhythmia Classifier</h1>
             {img
             ?
             <img src={URL.createObjectURL(img)} width="200" height="200" 
@@ -101,7 +94,7 @@ const Main=()=>{
            
         </div>
             }   
-        </Container>
+        </div>
     );
 }
 export default Main;
